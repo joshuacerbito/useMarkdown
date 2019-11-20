@@ -1,0 +1,24 @@
+{
+  "name": "@cerbito/usemarkdown",
+  "version": "1.0.1",
+  "description": "useMarkdown — React Custom Hook for text to markdown conversion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "markdown"
+  ],
+  "author": "Joshua Cerbito <josh@cerbito.com> (https://cerbito.com)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cerbito/useMarkdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cerbito/useMarkdown/issues"
+  },
+  "homepage": "https://github.com/Cerbito/useMarkdown#readme"
+}
