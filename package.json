@@ -1,6 +1,6 @@
 {
   "name": "@cerbito/usemarkdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "useMarkdown — React Custom Hook for text to markdown conversion",
   "main": "index.js",
   "scripts": {
