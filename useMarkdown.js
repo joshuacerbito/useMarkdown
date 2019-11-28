@@ -18,4 +18,3 @@ const useMarkdown = (initialContent = '') => {
 }
 
 export default useMarkdown;
-exports.useMarkdown = useMarkdown;
