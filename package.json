@@ -15,12 +15,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cerbito/useMarkdown.git"
+    "url": "git+https://github.com/joshuacerbito/useMarkdown.git"
   },
   "bugs": {
-    "url": "https://github.com/Cerbito/useMarkdown/issues"
+    "url": "https://github.com/joshuacerbito/useMarkdown/issues"
   },
-  "homepage": "https://github.com/Cerbito/useMarkdown#readme",
+  "homepage": "https://github.com/joshuacerbito/useMarkdown#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
