@@ -1,15 +1,15 @@
-import React from 'react';
-import { render, getByTestId } from "@testing-library/react";
+import React, { useEffect } from 'react';
+import { render, getByTestId, fireEvent } from "@testing-library/react";
 import useMarkdown from './useMarkdown';
 
 /**
  * Heading 1
  */
-test('convert heading 1 text to markdown', () => {
+it('converts a heading 1 text to proper HTML', () => {
   const Component = () => {
     const [heading1] = useMarkdown('# Heading 1');
     return <div data-testid="heading1">{heading1}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText1 = getByTestId(container, "heading1");
@@ -21,11 +21,11 @@ test('convert heading 1 text to markdown', () => {
 /**
  * Heading 2
  */
-test('convert heading 2 text to markdown', () => {
+it('converts a heading 2 text to proper HTML', () => {
   const Component = () => {
     const [heading2] = useMarkdown('## Heading 2');
     return <div data-testid="heading2">{heading2}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText2 = getByTestId(container, "heading2");
@@ -37,11 +37,11 @@ test('convert heading 2 text to markdown', () => {
 /**
  * Heading 3
  */
-test('convert heading 3 text to markdown', () => {
+it('converts a heading 3 text to proper HTML', () => {
   const Component = () => {
     const [heading3] = useMarkdown('### Heading 3');
     return <div data-testid="heading3">{heading3}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText3 = getByTestId(container, "heading3");
@@ -53,11 +53,11 @@ test('convert heading 3 text to markdown', () => {
 /**
  * Heading 4
  */
-test('convert heading 4 text to markdown', () => {
+it('converts a heading 4 text to proper HTML', () => {
   const Component = () => {
     const [heading4] = useMarkdown('#### Heading 4');
     return <div data-testid="heading4">{heading4}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText4 = getByTestId(container, "heading4");
@@ -69,11 +69,11 @@ test('convert heading 4 text to markdown', () => {
 /**
  * Heading 5
  */
-test('convert heading 5 text to markdown', () => {
+it('converts a heading 5 text to proper HTML', () => {
   const Component = () => {
     const [heading5] = useMarkdown('##### Heading 5');
     return <div data-testid="heading5">{heading5}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText5 = getByTestId(container, "heading5");
@@ -85,11 +85,11 @@ test('convert heading 5 text to markdown', () => {
 /**
  * Heading 6
  */
-test('convert heading 6 text to markdown', () => {
+it('converts a heading 6 text to proper HTML', () => {
   const Component = () => {
     const [heading6] = useMarkdown('###### Heading 6');
     return <div data-testid="heading6">{heading6}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const headingText6 = getByTestId(container, "heading6");
@@ -101,11 +101,11 @@ test('convert heading 6 text to markdown', () => {
 /**
  * Paragraph
  */
-test('convert paragaph text to markdown', () => {
+it('converts a paragaph text to proper HTML', () => {
   const Component = () => {
     const [paragraph] = useMarkdown('The quick brown fox jumps over the lazy dog.');
     return <div data-testid="paragraph">{paragraph}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const paragraphText = getByTestId(container, "paragraph");
@@ -117,11 +117,11 @@ test('convert paragaph text to markdown', () => {
 /**
  * Anchor
  */
-test('convert anchor to markdown', () => {
+it('converts an anchor text to proper HTML', () => {
   const Component = () => {
     const [anchor] = useMarkdown('[Link](https://google.com/)');
     return <div data-testid="anchor">{anchor}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const anchorText = getByTestId(container, "anchor");
@@ -132,13 +132,12 @@ test('convert anchor to markdown', () => {
 /**
  * Unordered List
  */
-test('convert unordered list to markdown', () => {
+it('converts an unordered list to proper HTML', () => {
   const Component = () => {
     const [ul] = useMarkdown(`- list item 1
 - list item 2`);
-
     return <div data-testid="ul">{ul}</div>;
-  }
+  };
 
   const { container } = render(<Component />);
   const ulText = getByTestId(container, "ul");
@@ -147,4 +146,108 @@ test('convert unordered list to markdown', () => {
 <li>list item 1</li>
 <li>list item 2</li>
 </ul>`);
+});
+
+/**
+ * Ordered List
+ */
+it('converts an ordered list to proper HTML', () => {
+  const Component = () => {
+    const [ol] = useMarkdown(`1. list item 1
+2. list item 2`);
+    return <div data-testid="ol">{ol}</div>;
+  };
+
+  const { container } = render(<Component />);
+  const olText = getByTestId(container, "ol");
+
+  expect(olText.textContent).toMatch(`<ol>
+<li>list item 1</li>
+<li>list item 2</li>
+</ol>`);
+});
+
+/**
+ * Image
+ */
+it('converts an image text to proper HTML', () => {
+  const Component = () => {
+    const [image] = useMarkdown('![Alt Text](https://picsum.photos/id/1/500/500)');
+    return <div data-testid="image">{image}</div>;
+  };
+
+  const { container } = render(<Component />);
+  const imageText = getByTestId(container, "image");
+
+  expect(imageText.textContent).toMatch('<p><img src="https://picsum.photos/id/1/500/500" alt="Alt Text"></p>');
+});
+
+/**
+ * Test using setter function
+ */
+it('converts text to proper HTML using setter function', () => {
+  const Component = () => {
+    const [text, setText] = useMarkdown();
+
+    useEffect(() => {
+      setText('[Link](https://google.com/)');
+    }, []);
+
+    return <div data-testid="text">{text}</div>;
+  }
+
+  const { container } = render(<Component />);
+  const renderedText = getByTestId(container, "text");
+
+  expect(renderedText.textContent).toMatch(`<a href="https://google.com/">Link</a>`);
+});
+
+/**
+ * Test using setter function
+ */
+it('returns the exact same inputted text', () => {
+  const Component = () => {
+    const [, setText, rawText] = useMarkdown();
+
+    useEffect(() => {
+      setText('[Link](https://google.com/)');
+    }, []);
+
+    return <div data-testid="text">{rawText}</div>;
+  }
+
+  const { container } = render(<Component />);
+  const renderedText = getByTestId(container, "text");
+
+  expect(renderedText.textContent).toEqual('[Link](https://google.com/)');
+});
+
+/**
+ * Test using setter function
+ */
+it('converts text to markdown via button click', () => {
+  const Component = () => {
+    const [markdown, setMarkdown] = useMarkdown();
+
+    const handleClick = () => {
+      setMarkdown('[Link](https://google.com/)');
+    };
+
+    return <>
+      <div data-testid="text">{markdown}</div>
+      <button data-testid="button" onClick={handleClick}>Set Text</button>
+    </>;
+  }
+
+  const { container } = render(<Component />);
+  fireEvent(
+    getByTestId(container, 'button'),
+    new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+    })
+  );
+  const renderedText = getByTestId(container, "text");
+
+  expect(renderedText.textContent).toMatch('<a href="https://google.com/">Link</a>');
 });
