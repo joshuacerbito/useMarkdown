@@ -1,6 +1,6 @@
 {
   "name": "usemarkdown",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "useMarkdown — React Custom Hook for text to markdown conversion",
   "main": "useMarkdown.js",
   "scripts": {
